@@ -39,13 +39,14 @@ merged_data_file = f"{data_dir}/merged_data.csv"
 if not os.path.isfile(merged_data_file):
     print("---------------------Merging data ---------------------")
     csv_files = glob.glob(f"{data_dir}/PRSA_Data_20130301-20170228/*")
-    merged_data = pd.concat((pd.read_csv(f) for f in csv_files), ignore_index=True)
+    merged_data = pd.concat((pd.read_csv(f)
+                            for f in csv_files), ignore_index=True)
     merged_data["date"] = merged_data.apply(
         lambda x: datetime.datetime(x["year"], x["month"], x["day"], x["hour"]), axis=1
     )
     merged_data = merged_data.sort_values(["date"], ascending=True)
     merged_data.set_index("date", inplace=True)
-    merged_data.to_csv(merged_data_file, index=False)
+    merged_data.to_csv(merged_data_file)
     print("Data merged and saved to file...")
 else:
     print("Merged data already exists")
