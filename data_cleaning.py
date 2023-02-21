@@ -99,13 +99,6 @@ def monthly_grouped(df: pd.DataFrame):
     return df.groupby("station").resample("D").mean()
 
 
-def get_labels(df: pd.DataFrame, target: str):
-    # to get the labels
-    y = df[target]
-    X = df.drop(target, axis=1)
-    return X, y
-
-
 def preprocess_df(df: pd.DataFrame):
     df = convert_wd(df)
     df_train, df_test = splitting(df)
