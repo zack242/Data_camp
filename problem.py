@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import rampwf as rw
-from data_cleaning import *
 from sklearn.model_selection import ShuffleSplit
 from sklearn.metrics import r2_score
 from rampwf.score_types.base import BaseScoreType
@@ -9,7 +8,7 @@ from rampwf.score_types.base import BaseScoreType
 
 problem_title = "Quality of Air"
 Predictions = rw.prediction_types.make_regression()
-workflow = rw.workflows.Regressor()
+workflow = rw.workflows.Estimator()
 
 
 class R2(BaseScoreType):
@@ -36,19 +35,13 @@ def get_cv(X, y):
     return cv.split(X, y)
 
 
-def _read_data(path, type_):
-    data_path = os.path.join("Data", "merged_data.csv")
+def _read_data(path, f_name):
+
     _target_column_name = "PM2.5"
 
-    data = pd.read_csv(data_path, index_col=0, parse_dates=True)
-
-    if type_ == "train":
-        data_train, _ = preprocess_df(data)
-        X, y = get_labels(data_train, _target_column_name)
-
-    elif type_ == "test":
-        _, data_test = preprocess_df(data)
-        X, y = get_labels(data_test, _target_column_name)
+    data = pd.read_csv(os.path.join(path, "data", f_name))
+    y = data[_target_column_name].values
+    X = data.drop([_target_column_name], axis=1)
 
     # for the "quick-test" mode, use less data
     test = os.getenv("RAMP_TEST_MODE", 0)
@@ -60,9 +53,11 @@ def _read_data(path, type_):
     return X, y
 
 
-def get_train_data():
-    return _read_data("train")
+def get_train_data(path="."):
+    f_name = "train.csv"
+    return _read_data(path, f_name)
 
 
-def get_test_data():
-    return _read_data("test")
+def get_test_data(path="."):
+    f_name = "test.csv"
+    return _read_data(path, f_name)

@@ -8,18 +8,19 @@ def get_estimator():
 
     # Variables to consider
     category = ["station"]
-    numeric = ['TEMP', 'PRES', 'DEWP', 'RAIN']
+    numeric = ["TEMP", "PRES", "DEWP", "RAIN"]
     # Model
     model = RandomForestRegressor()
     # Transformer
-    transf = ColumnTransformer(transformers=[("cat", OneHotEncoder(
-    ), category), ("numeric", StandardScaler, numeric)], remainder='drop')
+    transf = ColumnTransformer(
+        transformers=[
+            ("cat", OneHotEncoder(), category),
+            ("numeric", StandardScaler, numeric),
+        ],
+        remainder="drop",
+    )
 
     # Pipeline
-    pipe = Pipeline(
-        [
-            ("transf", transf),
-            ("model", model)
-        ]
-    )
+    pipe = Pipeline([("transf", transf), ("model", model)])
+
     return pipe
