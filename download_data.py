@@ -1,4 +1,4 @@
-from data_cleaning import preprocess_df, get_labels
+from data_cleaning import preprocess_df
 import requests
 import zipfile
 import os
@@ -41,7 +41,8 @@ merged_data_file = f"{data_dir}/merged_data.csv"
 if not os.path.isfile(merged_data_file):
     print("---------------------Merging data ---------------------")
     csv_files = glob.glob(f"{data_dir}/PRSA_Data_20130301-20170228/*")
-    merged_data = pd.concat((pd.read_csv(f) for f in csv_files), ignore_index=True)
+    merged_data = pd.concat((pd.read_csv(f)
+                            for f in csv_files), ignore_index=True)
     merged_data["date"] = merged_data.apply(
         lambda x: datetime.datetime(x["year"], x["month"], x["day"], x["hour"]), axis=1
     )
