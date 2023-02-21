@@ -1,9 +1,11 @@
+from data_cleaning import preprocess_df, get_labels
 import requests
 import zipfile
 import os
 import pandas as pd
 import glob
 import datetime
+
 
 # URL for the .zip file to be downloaded
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00501/PRSA2017_Data_20130301-20170228.zip"
@@ -39,8 +41,7 @@ merged_data_file = f"{data_dir}/merged_data.csv"
 if not os.path.isfile(merged_data_file):
     print("---------------------Merging data ---------------------")
     csv_files = glob.glob(f"{data_dir}/PRSA_Data_20130301-20170228/*")
-    merged_data = pd.concat((pd.read_csv(f)
-                            for f in csv_files), ignore_index=True)
+    merged_data = pd.concat((pd.read_csv(f) for f in csv_files), ignore_index=True)
     merged_data["date"] = merged_data.apply(
         lambda x: datetime.datetime(x["year"], x["month"], x["day"], x["hour"]), axis=1
     )
@@ -48,5 +49,9 @@ if not os.path.isfile(merged_data_file):
     merged_data.set_index("date", inplace=True)
     merged_data.to_csv(merged_data_file)
     print("Data merged and saved to file...")
+    train, test = preprocess_df(merged_data)
+    train.to_csv(f"{data_dir}/train.csv")
+    test.to_csv(f"{data_dir}/test.csv")
+
 else:
     print("Merged data already exists")
