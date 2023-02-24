@@ -1,8 +1,8 @@
 import os
 import pandas as pd
 import rampwf as rw
-from sklearn.model_selection import ShuffleSplit
-from sklearn.metrics import r2_score
+from sklearn.model_selection import TimeSeriesSplit
+from sklearn.metrics import r2_score, mean_squared_error
 from rampwf.score_types.base import BaseScoreType
 
 
@@ -17,21 +17,37 @@ class R2(BaseScoreType):
     maximum = 1.0
     name = "R2"
 
-    def __init__(self, precision=4):
+    def __init__(self, precision=2):
         self.precision = precision
 
     def __call__(self, y_true, y_pred):
         r_2 = r2_score(y_true, y_pred)
         return r_2
+    
+
+#Marius - Ici pour ton custom score, tu peux faire un truc du genre:
+class tmp_custom(BaseScoreType):
+    is_lower_the_better = False
+    minimum = 0.0
+    maximum = 1.0
+    name = "MSE"
+
+    def __init__(self, precision=4):
+        self.precision = precision
+
+    def __call__(self, y_true, y_pred):
+        mean_squared_error(y_true, y_pred)
+        return mean_squared_error(y_true, y_pred)
 
 
 score_types = [
     R2(),
+    tmp_custom()
 ]
 
 
 def get_cv(X, y):
-    cv = ShuffleSplit(n_splits=10, test_size=0.25, random_state=57)
+    cv = TimeSeriesSplit(n_splits=5)
     return cv.split(X, y)
 
 
