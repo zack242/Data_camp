@@ -6,3 +6,4 @@ jupyter
 ramp-workflow
 seaborn
 requests
+plotly
