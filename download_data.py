@@ -28,9 +28,9 @@ if not os.path.isfile(zip_file_path):
     print("---------------------Downloading data ---------------------")
     r = requests.get(url, allow_redirects=True)
     open(zip_file_path, "wb").write(r.content)
-    print("File downloaded...")
+    print(f"File downloaded and saved to {zip_file_path}")
 else:
-    print("File already downloaded")
+    print("Data already downloaded")
 
 # Extract the contents of the zip file to the directory
 with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
@@ -41,18 +41,24 @@ merged_data_file = f"{data_dir}/merged_data.csv"
 if not os.path.isfile(merged_data_file):
     print("---------------------Merging data ---------------------")
     csv_files = glob.glob(f"{data_dir}/PRSA_Data_20130301-20170228/*")
-    merged_data = pd.concat((pd.read_csv(f)
-                            for f in csv_files), ignore_index=True)
+    merged_data = pd.concat((pd.read_csv(f) for f in csv_files), ignore_index=True)
     merged_data["date"] = merged_data.apply(
         lambda x: datetime.datetime(x["year"], x["month"], x["day"], x["hour"]), axis=1
     )
     merged_data = merged_data.sort_values(["date"], ascending=True)
     merged_data.set_index("date", inplace=True)
     merged_data.to_csv(merged_data_file)
-    print("Data merged and saved to file...")
+    print(f"Data merged and saved to {merged_data_file}")
+
+    # Preprocess the merged data and split into train and test sets
+    print("---------------------Preprocessing data---------------------")
     train, test = main(merged_data)
-    train.to_csv(f"{data_dir}/train.csv")
-    test.to_csv(f"{data_dir}/test.csv")
+    train_file = f"{data_dir}/train.csv"
+    test_file = f"{data_dir}/test.csv"
+    train.to_csv(train_file)
+    test.to_csv(test_file)
+    print(f"Train and test sets saved to {train_file} and {test_file}")
+    print("---------------------Done---------------------")
 
 else:
     print("Merged data already exists")
