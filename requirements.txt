@@ -1,0 +1,9 @@
+matplotlib==3.5.2
+numpy==1.21.5
+pandas==1.5.2
+plotly==5.13.0
+ramp_workflow==0.6.0.dev0
+requests==2.27.1
+scikit_learn==1.2.1
+seaborn==0.11.2
+

@@ -1,10 +1,9 @@
 # Ramp Challenge - Predicting Air Quality
 
-This is a GitHub repository for a data science challenge. In this challenge, you will use data from different stations to predict the quality of the air in different regions.
+This is a GitHub repository for a data science challenge.
 
-# Presentation of the challenge (Marius)
-
-this challenge, use data from different station to predict the quality of the air in different regions.
+For this challenge, participants will be using meteorological data from different stations in Beijing, which will be merged to create a comprehensive dataset. This is important because air pollution levels can vary significantly across different areas of a city, depending on factors such as traffic density, industrial activity, and weather patterns. By combining data from multiple stations, we can capture this variation and obtain a more accurate representation of air quality across the city.
+The merged dataset will include various meteorological variables such as temperature, humidity, wind speed, and precipitation, as well as PM2.5 concentrations, which will serve as the target variable for the predictive model. Participants will be tasked with developing a model that can accurately predict PM2.5 concentrations based on the available meteorological data, with the ultimate goal of identifying effective strategies for air pollution reduction and promoting public health and environmental sustainability
 
 # Getting Started
 
@@ -30,14 +29,10 @@ pip install ramp-workflow
 
 Go to the ramp-workflow wiki for more help on the RAMP ecosystem.
 
-3. Install the requirement or setup the conda environment
+3. Install the requirement
 
 ```
 pip install -r requirements.txt
-```
-
-```
-conda env ami.env
 ```
 
 ## Download the data
@@ -49,7 +44,7 @@ python download_data.py
 ## Test the starting kit
 
 ```
-ramp-test --quick-test
+!ramp-test --submission starting_kit  --quick-test
 ```
 
 ## License
