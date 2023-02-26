@@ -3,7 +3,7 @@ import pandas as pd
 import rampwf as rw
 import numpy as np
 from sklearn.model_selection import TimeSeriesSplit
-from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.metrics import r2_score
 from rampwf.score_types.base import BaseScoreType
 
 
