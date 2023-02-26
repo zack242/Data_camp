@@ -1,8 +1,9 @@
 import os
 import pandas as pd
 import rampwf as rw
+import numpy as np
 from sklearn.model_selection import TimeSeriesSplit
-from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.metrics import r2_score
 from rampwf.score_types.base import BaseScoreType
 
 
@@ -23,26 +24,30 @@ class R2(BaseScoreType):
     def __call__(self, y_true, y_pred):
         r_2 = r2_score(y_true, y_pred)
         return r_2
-    
 
-#Marius - Ici pour ton custom score, tu peux faire un truc du genre:
-class tmp_custom(BaseScoreType):
-    is_lower_the_better = False
+
+# Symmetric Mean Absolute Percentage Error (SMAPE)
+class SMAPE(BaseScoreType):
+    is_lower_the_better = True
     minimum = 0.0
     maximum = 1.0
-    name = "MSE"
+    name = "SMAPE"
 
-    def __init__(self, precision=4):
+    def __init__(self, precision=2):
         self.precision = precision
 
     def __call__(self, y_true, y_pred):
-        mean_squared_error(y_true, y_pred)
-        return mean_squared_error(y_true, y_pred)
+        smape = (
+            100
+            / len(y_true)
+            * np.sum(2 * np.abs(y_pred - y_true) / (np.abs(y_true) + np.abs(y_pred)))
+        )
+        return smape
 
 
 score_types = [
     R2(),
-    tmp_custom()
+    SMAPE(),
 ]
 
 
