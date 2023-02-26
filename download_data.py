@@ -1,4 +1,4 @@
-from data_cleaning import preprocess_df
+from data_cleaning2 import main
 import requests
 import zipfile
 import os
@@ -50,7 +50,7 @@ if not os.path.isfile(merged_data_file):
     merged_data.set_index("date", inplace=True)
     merged_data.to_csv(merged_data_file)
     print("Data merged and saved to file...")
-    train, test = preprocess_df(merged_data)
+    train, test = main(merged_data)
     train.to_csv(f"{data_dir}/train.csv")
     test.to_csv(f"{data_dir}/test.csv")
 
