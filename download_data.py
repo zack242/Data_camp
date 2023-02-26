@@ -1,4 +1,4 @@
-from data_cleaning2 import main
+from data_cleaning import main
 import requests
 import zipfile
 import os
