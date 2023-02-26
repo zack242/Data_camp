@@ -108,13 +108,13 @@ def cleaning(df_train, df_test):
 def get_datetime(df:pd.DataFrame):
     # return a dataframe indexed with datetime
     df_copy = df.copy()
-    df_copy.loc[:, "date"] = df_copy.apply(lambda x: datetime.datetime(
+    df_copy.loc[:, "Date-time"] = df_copy.apply(lambda x: datetime.datetime(
     x['year'], x['month'], x['day'], x['hour']), axis=1)
-    df_copy.set_index("date", inplace=True)
+    df_copy.set_index("Date-time", inplace=True)
     df_copy = df_copy.drop(['No'], axis=1)
     return(df_copy)
 
-def group_station(df:pd.DataFrame, period="D"):
+def monthly_grouped(df:pd.DataFrame, period="D"):
     #to get a dataframe by stations monthly averaged
     df.drop(['year', 'month', 'day', 'hour'], axis=1, inplace=True)
     return(df.groupby('station').resample(period).mean("numeric_only"))
