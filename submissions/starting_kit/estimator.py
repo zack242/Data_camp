@@ -5,13 +5,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.base import BaseEstimator
 
 
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.base import BaseEstimator
-
-
 class RegressorTransform(BaseEstimator):
 
     """
