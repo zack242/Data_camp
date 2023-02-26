@@ -23,9 +23,8 @@ class R2(BaseScoreType):
     def __call__(self, y_true, y_pred):
         r_2 = r2_score(y_true, y_pred)
         return r_2
-    
 
-#Marius - Ici pour ton custom score, tu peux faire un truc du genre:
+
 class tmp_custom(BaseScoreType):
     is_lower_the_better = False
     minimum = 0.0
