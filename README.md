@@ -6,7 +6,7 @@
 - Gauthier MIRALLES
 - Anthony NGUYEN
 - Zakaria TOZY 
-- Angie MENDEZ LLANOS
+- Angie MÉNDEZ LLANOS
 - Marius Bartel SAMO KAMGA
 
 
