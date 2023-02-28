@@ -3,11 +3,11 @@
 ## Authors : 
 
 - Karine ZAFY
-- Gauthier Miralles
-- Anthony Nguyen
+- Gauthier MIRALLES
+- Anthony NGUYEN
 - Zakaria TOZY 
-- Angie mendez Llanos 
-- SAMO KAMGA Marius Bartel
+- Angie MENDEZ LLANOS
+- Marius Bartel SAMO KAMGA
 
 
 This is a GitHub repository for a data science challenge.
