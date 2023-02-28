@@ -1,5 +1,15 @@
 # Ramp Challenge - Predicting Air Quality
 
+## Authors : 
+
+- Karine ZAFY
+- Gauthier Miralles
+- Anthony Nguyen
+- Zakaria TOZY 
+- Angie mendez Llanos 
+- SAMO KAMGA Marius Bartel
+
+
 This is a GitHub repository for a data science challenge.
 
 For this challenge, participants will be using meteorological data from different stations in Beijing, which will be merged to create a comprehensive dataset. This is important because air pollution levels can vary significantly across different areas of a city, depending on factors such as traffic density, industrial activity, and weather patterns. By combining data from multiple stations, we can capture this variation and obtain a more accurate representation of air quality across the city.
